@@ -1,0 +1,37 @@
+{
+    "name": "bookdb_b",
+    "version": "1.0.0",
+    "description": "",
+    "main": "server.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "nodemon --exec babel-node server.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/chkim116/bookdb_b.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/chkim116/bookdb_b/issues"
+    },
+    "homepage": "https://github.com/chkim116/bookdb_b#readme",
+    "dependencies": {
+        "@babel/node": "^7.12.6",
+        "@babel/cli": "^7.12.8",
+        "@babel/core": "^7.0.0-1",
+        "@babel/preset-env": "^7.12.7",
+        "babel-core": "7.0.0-bridge.0",
+        "cookie-parser": "^1.4.5",
+        "dotenv": "^8.2.0",
+        "express": "^4.17.1",
+        "helmet": "^4.2.0",
+        "mongoose": "^5.11.4",
+        "morgan": "^1.10.0"
+    },
+    "devDependencies": {
+        "nodemon": "^2.0.6"
+    }
+}
