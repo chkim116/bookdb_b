@@ -1,11 +1,19 @@
 import mongoose from "mongoose";
 
 const UserScheme = mongoose.Schema({
-    userId: String,
-    post: [
+    email: String,
+    password: String,
+    nickName: String,
+    board: [
         {
-            type: String,
-            regDate: String,
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Board",
+        },
+    ],
+    review: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Review",
         },
     ],
 });
