@@ -4,14 +4,11 @@ const ReviewSchema = mongoose.Schema({
     title: String,
     content: String,
     regDate: Date,
-    books: {
+    book: {
         title: String,
-        link: String,
         image: String,
         author: String,
-        publisher: String,
-        pubdate: String,
-        description: String,
+        isbn: String,
     },
     creator: {
         type: mongoose.Schema.Types.ObjectId,
