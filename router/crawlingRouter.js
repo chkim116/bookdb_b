@@ -7,7 +7,9 @@ import {
 
 const crawlingRotuer = express.Router();
 
-crawlingRotuer.get("/best", bestCrawling);
+// crawling
+
+crawlingRotuer.post("/best", bestCrawling);
 crawlingRotuer.get("/steady", steadyCrawling);
 crawlingRotuer.get("/interview", interviewCrawling);
 

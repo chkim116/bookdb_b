@@ -1,5 +1,9 @@
 import express from "express";
-import { getLogin } from "../controller/userController";
+import {
+    postLogin,
+    postRegister,
+    userAuth,
+} from "../controller/userController";
 
 const userRouter = express.Router();
 
@@ -7,6 +11,10 @@ userRouter.post("/login", postLogin);
 
 userRouter.post("/register", postRegister);
 
-userRouter.auth("/auth", userAuth);
+userRouter.get("/auth", userAuth);
+
+userRouter.get("/", (req, res) => {
+    res.send("heeo");
+});
 
 export default userRouter;

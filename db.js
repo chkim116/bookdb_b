@@ -1,6 +1,8 @@
 import mongoose from "mongoose";
+import dotenv from "dotenv";
+dotenv.config();
 
-mongoose.connect(process.env.MONGO, {
+mongoose.connect(process.env.MONGO_URL, {
     useNewUrlParser: true,
     useFindAndModify: false,
     useUnifiedTopology: true,
@@ -11,5 +13,3 @@ const db = mongoose.connection;
 db.once("open", () => {
     console.log("CONNECT DB");
 });
-
-console.log("주석 처리하세요");
