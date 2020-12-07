@@ -5,7 +5,7 @@ dotenv.config();
 export const searchNaver = async (req, res) => {
     const { searchText } = req.body;
     const text = encodeURI(searchText);
-    const url = `https://openapi.naver.com/v1/search/book?query=${text}&d_titl=${text}`;
+    const url = `https://openapi.naver.com/v1/search/book?query=${text}&d_titl=${text}&display=20`;
     try {
         const results = await Axios.get(url, {
             headers: {
