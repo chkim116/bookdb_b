@@ -17,7 +17,7 @@ const reviewRouter = express.Router();
 reviewRouter.get("/", getReview);
 reviewRouter.get("/:id", getReviewById);
 reviewRouter.post("/post", postReview);
-reviewRouter.put("/put", updateReview);
+reviewRouter.put("/edit", updateReview);
 reviewRouter.delete("/del/:id", delReview);
 reviewRouter.post("/img", uploadImage, postImg);
 

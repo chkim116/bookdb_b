@@ -42,7 +42,22 @@ export const postReview = async (req, res) => {
     }
 };
 
-export const updateReview = (req, res) => {};
+export const updateReview = async (req, res) => {
+    const { title, content, id } = req.body;
+    try {
+        await Review.findByIdAndUpdate(
+            { _id: id },
+            {
+                title,
+                content,
+            }
+        );
+        res.status(200).json({ message: "update clear!" });
+    } catch (err) {
+        console.log(err);
+        res.status(400).json(err.message);
+    }
+};
 
 export const delReview = async (req, res) => {
     const { id } = req.params;
