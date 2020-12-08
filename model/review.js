@@ -3,8 +3,10 @@ import mongoose from "mongoose";
 const ReviewSchema = mongoose.Schema({
     title: String,
     content: String,
-    regDate: Date,
-    book: {
+    regDate: String,
+    userId: String,
+    rating: String,
+    selectedBook: {
         title: String,
         image: String,
         author: String,
