@@ -3,7 +3,7 @@ import Review from "../model/review";
 
 export const getReview = async (req, res) => {
     try {
-        const reviews = await Review.find({}).sort();
+        const reviews = await Review.find({}).sort({ _id: -1 });
         res.status(200).json(reviews);
     } catch (err) {
         console.log(err);
@@ -14,7 +14,7 @@ export const getReview = async (req, res) => {
 export const getReviewById = async (req, res) => {
     const { id } = req.params;
     try {
-        const review = await Review.findById(id).sort();
+        const review = await Review.findById(id);
         res.status(200).json(review);
     } catch (err) {
         console.log(err);

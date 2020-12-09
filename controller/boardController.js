@@ -1,7 +1,76 @@
-export const getBoard = (req, res) => {};
+import Board from "../model/board";
+import mongoose from "mongoose";
 
-export const postBoard = (req, res) => {};
+export const getBoard = async (req, res) => {
+    try {
+        const board = await Board.find({}).sort({ _id: -1 });
+        res.status(200).json(board);
+    } catch (err) {
+        console.log(err);
+        res.status(400).json(err.message);
+    }
+};
 
-export const updateBoard = (req, res) => {};
+export const getBoardById = async (req, res) => {
+    const { id } = req.params;
+    try {
+        const board = await Board.findById(id);
+        board.count += 1;
+        board.save();
+        console.log(board);
+        res.status(200).json(board);
+    } catch (err) {
+        console.log(err);
+        res.status(400).json(err.message);
+    }
+};
 
-export const delBoard = (req, res) => {};
+export const postBoard = async (req, res) => {
+    const { title, content, regDate } = req.body;
+    const id = mongoose.Types.ObjectId("4edd40c86762e0fb12000003");
+    const thumb = content.split('="')[1].split('">')[0];
+
+    try {
+        const board = await Board.create({
+            title,
+            content,
+            regDate,
+            thumb,
+            creator: id,
+            userId: "익명",
+            count: 0,
+        });
+        res.status(200).json(board);
+    } catch (err) {
+        console.log(err);
+        res.status(400).json(err.message);
+    }
+};
+
+export const updateBoard = async (req, res) => {
+    const { title, content, id } = req.body;
+    try {
+        await Board.findByIdAndUpdate(
+            { _id: id },
+            {
+                title,
+                content,
+            }
+        );
+        res.status(200).json({ message: "update clear!" });
+    } catch (err) {
+        console.log(err);
+        res.status(400).json(err.message);
+    }
+};
+
+export const delBoard = async (req, res) => {
+    const { id } = req.params;
+    try {
+        await Board.findByIdAndDelete({ _id: id });
+        res.status(200).json({ message: "delete clear" });
+    } catch (err) {
+        console.log(err);
+        res.status(400).json(err.message);
+    }
+};
