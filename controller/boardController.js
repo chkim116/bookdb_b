@@ -17,7 +17,6 @@ export const getBoardById = async (req, res) => {
         const board = await Board.findById(id);
         board.count += 1;
         board.save();
-        console.log(board);
         res.status(200).json(board);
     } catch (err) {
         console.log(err);

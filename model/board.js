@@ -4,7 +4,7 @@ import autoIncrement from "mongoose-auto-increment";
 const connection = mongoose.createConnection("mongodb://localhost:27017/board");
 autoIncrement.initialize(connection);
 
-const BoardScheme = mongoose.Schema({
+const BoardSchema = mongoose.Schema({
     title: String,
     content: String,
     regDate: String,
@@ -18,13 +18,13 @@ const BoardScheme = mongoose.Schema({
     count: Number,
 });
 
-BoardScheme.plugin(autoIncrement.plugin, {
+BoardSchema.plugin(autoIncrement.plugin, {
     model: "Board",
     field: "num",
     startAt: 1,
     increment: 1,
 });
 
-const model = mongoose.model("Board", BoardScheme);
+const model = mongoose.model("Board", BoardSchema);
 
 export default model;

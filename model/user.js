@@ -1,23 +1,30 @@
 import mongoose from "mongoose";
+import passportLocalMongoose from "passport-local-mongoose";
 
-const UserScheme = mongoose.Schema({
+const UserSchema = mongoose.Schema({
     email: String,
     password: String,
     nickName: String,
     board: [
         {
             type: mongoose.Schema.Types.ObjectId,
-            ref: "Board",
+            ref: "board",
         },
     ],
     review: [
         {
             type: mongoose.Schema.Types.ObjectId,
-            ref: "Review",
+            ref: "review",
         },
     ],
+    isAdmin: { type: Boolean, default: false },
 });
 
-const model = mongoose.model("User", UserScheme);
+UserSchema.plugin(passportLocalMongoose, {
+    usernameField: "email",
+    passwordField: "password",
+});
+
+const model = mongoose.model("User", UserSchema);
 
 export default model;
