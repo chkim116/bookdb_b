@@ -28,14 +28,18 @@ export const getBoardById = async (req, res) => {
 export const postBoard = async (req, res) => {
     const { title, content, regDate } = req.body;
     const id = mongoose.Types.ObjectId("4edd40c86762e0fb12000003");
-    const thumb = content.split('="')[1].split('">')[0];
-
+    let thumb;
+    if (content.includes("<img src=")) {
+        thumb = content.split('<img src="')[1].split('">')[0];
+    } else {
+        thumb = false;
+    }
     try {
         const board = await Board.create({
             title,
             content,
             regDate,
-            thumb,
+            thumb: thumb ? thumb : "",
             creator: id,
             userId: "익명",
             count: 0,
