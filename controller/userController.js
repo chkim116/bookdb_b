@@ -66,7 +66,7 @@ export const postLogin = (req, res, next) => {
 export const userAuth = (req, res, next) => {
     const token = req.cookies.x_auth;
     if (token === undefined || token === "") {
-        return next();
+        return;
     }
 
     jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
@@ -98,8 +98,6 @@ export const logout = (req, res) => {
         sameSite: "none",
     };
     req.token = "";
-    return res
-        .cookie("x_auth", "", options)
-        .status(200)
-        .json({ message: "clear!" });
+
+    return res.clearCookie("x_auth").status(200).json({ message: "clear!" });
 };

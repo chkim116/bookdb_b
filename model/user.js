@@ -4,7 +4,7 @@ import passportLocalMongoose from "passport-local-mongoose";
 const UserSchema = mongoose.Schema({
     email: String,
     password: String,
-    nickName: String,
+    nickname: String,
     board: [
         {
             type: mongoose.Schema.Types.ObjectId,

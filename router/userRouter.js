@@ -19,7 +19,7 @@ userRouter.get("/auth", userAuth, async (req, res) => {
         isAdmin: req.user.isAdmin,
         board: req.user.board,
         review: req.user.review,
-        token: req.token,
+        nickname: req.user.nickname,
     });
 });
 

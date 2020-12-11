@@ -1,4 +1,5 @@
 import Board from "../model/board";
+import User from "../model/user";
 import mongoose from "mongoose";
 
 export const getBoard = async (req, res) => {
@@ -25,24 +26,30 @@ export const getBoardById = async (req, res) => {
 };
 
 export const postBoard = async (req, res) => {
-    const { title, content, regDate } = req.body;
-    const id = mongoose.Types.ObjectId("4edd40c86762e0fb12000003");
+    const { title, content, regDate, id, nickname } = req.body;
+    const notUser = mongoose.Types.ObjectId("4edd40c86762e0fb12000003");
     let thumb;
     if (content.includes("<img src=")) {
         thumb = content.split('<img src="')[1].split('">')[0];
     } else {
         thumb = false;
     }
+    console.log(id, nickname);
     try {
         const board = await Board.create({
             title,
             content,
             regDate,
             thumb: thumb ? thumb : "",
-            creator: id,
-            userId: "익명",
+            creator: id !== "" ? id : notUser,
+            userId: nickname === "" ? "익명" : nickname,
             count: 0,
         });
+        if (id) {
+            const user = await User.findById(id);
+            user.board.push(board._id);
+            user.save();
+        }
         res.status(200).json(board);
     } catch (err) {
         console.log(err);

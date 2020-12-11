@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import Review from "../model/review";
+import User from "../model/user";
 
 export const getReview = async (req, res) => {
     try {
@@ -23,18 +24,31 @@ export const getReviewById = async (req, res) => {
 };
 
 export const postReview = async (req, res) => {
-    const { title, content, regDate, selectedBook, rating } = req.body;
-    const id = mongoose.Types.ObjectId("4edd40c86762e0fb12000003");
+    const {
+        title,
+        content,
+        regDate,
+        selectedBook,
+        rating,
+        id,
+        nickname,
+    } = req.body;
+    const notUser = mongoose.Types.ObjectId("4edd40c86762e0fb12000003");
     try {
+        const user = await User.findById(id);
         const review = await Review.create({
             title,
             content,
             regDate,
             selectedBook,
             rating,
-            creator: id,
-            userId: "익명",
+            creator: id ? id : notUser,
+            userId: nickname ? nickname : "익명",
         });
+        if (user) {
+            user.review.push(review._id);
+            user.save();
+        }
         res.status(200).json(review);
     } catch (err) {
         console.log(err);
