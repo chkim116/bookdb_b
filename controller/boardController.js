@@ -34,7 +34,6 @@ export const postBoard = async (req, res) => {
     } else {
         thumb = false;
     }
-    console.log(id, nickname);
     try {
         const board = await Board.create({
             title,

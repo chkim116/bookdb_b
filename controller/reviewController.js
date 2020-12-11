@@ -16,6 +16,8 @@ export const getReviewById = async (req, res) => {
     const { id } = req.params;
     try {
         const review = await Review.findById(id);
+        review.count += 1;
+        review.save();
         res.status(200).json(review);
     } catch (err) {
         console.log(err);
@@ -44,6 +46,7 @@ export const postReview = async (req, res) => {
             rating,
             creator: id ? id : notUser,
             userId: nickname ? nickname : "익명",
+            count: 0,
         });
         if (user) {
             user.review.push(review._id);

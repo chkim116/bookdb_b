@@ -6,6 +6,7 @@ const ReviewSchema = mongoose.Schema({
     regDate: String,
     userId: String,
     rating: String,
+    count: Number,
     selectedBook: {
         title: String,
         image: String,
