@@ -3,9 +3,10 @@ import dotenv from "dotenv";
 dotenv.config();
 
 export const searchNaver = async (req, res) => {
-    const { searchText } = req.body;
+    const { searchText, display } = req.body;
+    console.log(req.body);
     const text = encodeURI(searchText);
-    const url = `https://openapi.naver.com/v1/search/book?query=${text}&d_titl=${text}&display=20`;
+    const url = `https://openapi.naver.com/v1/search/book?query=${text}&d_titl=${text}&display=${display}`;
     try {
         const results = await Axios.get(url, {
             headers: {

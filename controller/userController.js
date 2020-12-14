@@ -92,12 +92,21 @@ export const userAuth = (req, res, next) => {
 };
 
 export const logout = (req, res) => {
-    const options = process.env.NODE_ENV === "production" && {
-        httpOnly: true,
-        secure: true,
-        sameSite: "none",
-    };
     req.token = "";
 
     return res.clearCookie("x_auth").status(200).json({ message: "clear!" });
+};
+
+export const userPost = async (req, res) => {
+    const { id } = req.params;
+    try {
+        const user = await User.findById(id)
+            .populate("review")
+            .populate("board");
+        console.log(user);
+        res.status(200).json(user);
+    } catch (err) {
+        console.log(err);
+        res.status(400).json(err);
+    }
 };

@@ -8,13 +8,13 @@ const UserSchema = mongoose.Schema({
     board: [
         {
             type: mongoose.Schema.Types.ObjectId,
-            ref: "board",
+            ref: "Board",
         },
     ],
     review: [
         {
             type: mongoose.Schema.Types.ObjectId,
-            ref: "review",
+            ref: "Review",
         },
     ],
     isAdmin: { type: Boolean, default: false },

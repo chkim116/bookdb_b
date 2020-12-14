@@ -2,6 +2,16 @@ import mongoose from "mongoose";
 import Review from "../model/review";
 import User from "../model/user";
 
+export const recentReview = async (req, res) => {
+    try {
+        const reviews = await Review.find({}).sort({ _id: -1 }).limit(3);
+        res.status(200).json(reviews);
+    } catch (err) {
+        console.log(err);
+        res.status(400).json(err);
+    }
+};
+
 export const getReview = async (req, res) => {
     try {
         const reviews = await Review.find({}).sort({ _id: -1 });

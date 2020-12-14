@@ -6,6 +6,7 @@ import {
     postImg,
     postReview,
     updateReview,
+    recentReview,
 } from "../controller/reviewController";
 
 import { uploadImage } from "../multer";
@@ -14,6 +15,7 @@ const reviewRouter = express.Router();
 
 // review
 
+reviewRouter.get("/recent", recentReview);
 reviewRouter.get("/", getReview);
 reviewRouter.get("/:id", getReviewById);
 reviewRouter.post("/post", postReview);
