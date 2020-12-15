@@ -47,11 +47,8 @@ export const postLogin = (req, res, next) => {
                     if (err) {
                         return res.status(400).json(err);
                     }
-                    const options = process.env.NODE_ENV === "production" && {
+                    const options = {
                         maxAge: 1000 * 60 * 60 * 24 * 7,
-                        httpOnly: true,
-                        secure: true,
-                        sameSite: "none",
                     };
                     return res
                         .cookie("x_auth", user.token, options)

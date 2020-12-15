@@ -1,8 +1,5 @@
 import mongoose from "mongoose";
-import autoIncrement from "mongoose-auto-increment";
-
-const connection = mongoose.createConnection("mongodb://localhost:27017/board");
-autoIncrement.initialize(connection);
+const AutoIncrement = require("mongoose-sequence")(mongoose);
 
 const BoardSchema = mongoose.Schema({
     title: String,
@@ -18,11 +15,8 @@ const BoardSchema = mongoose.Schema({
     count: Number,
 });
 
-BoardSchema.plugin(autoIncrement.plugin, {
-    model: "Board",
-    field: "num",
-    startAt: 1,
-    increment: 1,
+BoardSchema.plugin(AutoIncrement, {
+    inc_field: "num",
 });
 
 const model = mongoose.model("Board", BoardSchema);
