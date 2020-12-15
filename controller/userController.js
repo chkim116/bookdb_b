@@ -103,7 +103,6 @@ export const userPost = async (req, res) => {
         const user = await User.findById(id)
             .populate("review")
             .populate("board");
-        console.log(user);
         res.status(200).json(user);
     } catch (err) {
         console.log(err);
