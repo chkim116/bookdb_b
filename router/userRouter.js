@@ -13,6 +13,8 @@ userRouter.post("/register", postRegister, postLogin);
 userRouter.post("/login", postLogin);
 
 userRouter.get("/auth", userAuth, async (req, res) => {
+    console.log(req.headers);
+
     res.status(200).json({
         id: req.user._id,
         email: req.user.email,
