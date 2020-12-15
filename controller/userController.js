@@ -49,14 +49,17 @@ export const postLogin = (req, res, next) => {
                     }
                     const options = {
                         maxAge: 1000 * 60 * 60 * 24 * 7,
-                        httpOnly: true,
+                        httpOnly: process.env.NODE_ENV === "production",
                         secure: process.env.NODE_ENV === "production",
-                        sameSite: "none",
+                        sameSite:
+                            process.env.NODE_ENV === "production"
+                                ? "none"
+                                : "lax",
                     };
                     return res
                         .cookie("x_auth", user.token, options)
                         .status(200)
-                        .json(user._id);
+                        .json(token);
                 });
             });
         }

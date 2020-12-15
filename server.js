@@ -21,7 +21,12 @@ import searchRouter from "./router/searchRouter";
 
 const app = express();
 
-app.use(cors({ origin: true, credentials: true }));
+app.use(
+    cors({
+        origin: true,
+        credentials: true,
+    })
+);
 app.use(helmet());
 app.use(morgan("dev"));
 app.use(hpp());

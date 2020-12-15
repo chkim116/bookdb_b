@@ -13,8 +13,6 @@ userRouter.post("/register", postRegister, postLogin);
 userRouter.post("/login", postLogin);
 
 userRouter.get("/auth", userAuth, async (req, res) => {
-    console.log(req.headers);
-
     res.status(200).json({
         id: req.user._id,
         email: req.user.email,
@@ -22,6 +20,7 @@ userRouter.get("/auth", userAuth, async (req, res) => {
         board: req.user.board,
         review: req.user.review,
         nickname: req.user.nickname,
+        token: req.user.token,
     });
 });
 
