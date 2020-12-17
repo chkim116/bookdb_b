@@ -11,6 +11,10 @@ export const postRegister = async (req, res, next) => {
     } = req;
     const salt = await bcrypt.genSalt(10); // hash
     const hashPassword = await bcrypt.hash(password, salt);
+    const existUser = await User.find({ nickname });
+    if (existUser.length > 0) {
+        return res.status(400).json({ message: "이미 등록된 유저입니다." });
+    }
     try {
         const user = await User({
             email,
