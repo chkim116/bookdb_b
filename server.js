@@ -14,7 +14,6 @@ import "./passport";
 
 // router
 import userRouter from "./router/userRouter";
-import crawlingRouter from "./router/crawlingRouter";
 import reviewRouter from "./router/reviewRouter";
 import boardRouter from "./router/boardRouter";
 import searchRouter from "./router/searchRouter";
@@ -38,7 +37,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use("/", userRouter);
-app.use("/crawling", crawlingRouter);
 app.use("/review", reviewRouter);
 app.use("/board", boardRouter);
 app.use("/search", searchRouter);
