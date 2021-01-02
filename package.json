@@ -5,7 +5,7 @@
     "main": "server.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "dev": "nodemon --exec babel-node server.js",
+        "dev": "babel-node server.js",
         "start": "cross-env NODE_ENV=production babel-node server.js"
     },
     "repository": {
